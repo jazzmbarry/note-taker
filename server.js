@@ -4,8 +4,12 @@ const path = require('path')
 const app = express()
 const PORT = 3001
 
-app.get('/api/notes', (req, res) => {
-    res.sendFile(path.join(__dirname, "./db/notes.json"))
+app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname, "./index.html"))
+})
+
+app.get('/notes', (req, res) => {
+    res.sendFile(path.join(__dirname, "./notes.html"))
 })
 
 app.listen(PORT, () => {
