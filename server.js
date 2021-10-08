@@ -30,12 +30,35 @@ app.get('/api/notes', (req, res) => {
 
 app.post('/api/notes', (req, res) => {
    let newNote = req.body
+   newNote.id = Math.floor(Math.random()*100000000)
    allNotes.push(newNote)
 //    allNotes = JSON.stringify(allNotes)
    fs.writeFile('./db/notes.json', JSON.stringify(allNotes), err => {
        if (err) throw err
        res.json("success")
    })
+})
+
+app.put('/api/notes/:id', (req, res) => {
+    for (const note of allNotes) {
+        if (note.id === req.params.id) {
+            note.text = req.body.text
+            note.title = req.body.title
+            fs.writeFile('./db/notes.json', JSON.stringify(allNotes), err => {
+                if (err) throw err
+                res.json('success')
+            })
+        }
+    }
+    console.log(allNotes)
+} )
+
+app.delete('/api/notes/:id', (req, res) => {
+    for (const note of allNotes) {
+        if (note.id === req.params.id) {
+                
+        }
+    }
 })
     
 
